@@ -6,7 +6,7 @@ url: "http://www.sphinfo.com/"
 
 # User settings
 username: Chiho Yoon
-user_description: Not only specialised in GIS, but also a web and Andorid delvoper. Eager to learn new concepts and a great team player.
+user_description: Not only specialised in GIS, but also a web and Andorid delvoper. Eager to learn new concepts and a great team player. Currently working at a Google Premium Partner company
 user_title: Web Developer, GIS Specialist
 email: chiho1jan@naver.com
 twitter_username: lorem_ipsum
@@ -15,6 +15,6 @@ gplus_username:  lorem_ipsum
 
 # Google-analytics
 google-analytics:
-  id: ""
+  id: "UA-96178108-1"
 
 exclude: ['package.json', 'src' , 'node_modules']
