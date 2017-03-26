@@ -1,4 +1,4 @@
-# Particle Jekyll Theme
+# Chonim's Portfolio with Particle Jekyll Theme
 
 ![](./particle.jpg)
 
