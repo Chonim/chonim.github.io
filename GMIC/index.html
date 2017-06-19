@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Maps Demo ver 3.0</title>
+  <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-switch.min.css" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBsYVLaGllEz-XZYoF6xv_wqPsrG0k7oFs&libraries=places&signed_in=false"></script>
+  <script src="https://www.google.com/jsapi"></script>
+  <script src="js/bootstrap-switch.min.js" charset="utf-8"></script>
+  <script src="js/app.js" charset="utf-8"></script>
+  <script src="js/epolys.js" charset="utf-8"></script>
+  <script src="js/voiceRecognition.js" charset="utf-8"></script>
+  <!-- <script src="js/daynightoverlay.js" charset="utf-8"></script> -->
+</head>
+<body>
+  <div class="ultimate-wrapper">
+    <div class="bodyContainer" id="bodyContents">
+      <div id="header">
+        <div class="col-sm-1">
+          <img id="header-back" src="image/left-arrow.png" />
+        </div>
+        <div id="header-title" class="col-sm-10">주유소</div>
+        <div class="col-sm-1">
+          <img id="header-close" src="image/close.png" />
+        </div>
+      </div>
+      <div id="mySidenav" class="sidenav">
+        <div class="headerBox">
+          <a href="javascript:void(0)" class="settingBtn" id="settingBtn" data-toggle="modal" data-target="#settingModal" data-direction='bottom'>
+            <img src="image/settings.png" />
+          </a>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" id="closeNav">
+            &times;
+          </a>
+        </div>
+        <div id="menuList">
+          <div class="input-wrapper">
+            <input type="text" id="pac-input" placeholder="검색" />
+            <img id="microphone" src="image/microphone.png" data-toggle="modal" data-target="#waitDialog">
+            <span id="cancelBtn">취소</span>
+          </div>
+          <a href="#" id="toHome" class="menuDefault menuListItem home-office" data-toggle="modal" data-target="#myModal" data-direction='bottom'>
+            <div>
+              <span class="col-sm-1"><img src="image/home.png" /></span>
+              <span width="col-sm-10">
+                집
+              </span>
+              <span width="10%">></span>
+            </div>
+          </a>
+          <a href="#" id="toWork" class="menuDefault menuListItem home-office" data-toggle="modal" data-target="#myModal">
+            <div>
+              <span class="col-sm-1"><img src="image/connections.png" /></span>
+              <span width="col-sm-10">
+                직장
+              </span>
+              <span width="10%">></span>
+            </div>
+          </a>
+          <a href="#" class="gasMenu menuListItem">
+            <span class="col-sm-1"><img src="image/gas-station-thumb.png" /></span>
+            주유소
+          </a>
+          <a href="#" class="openFavoriteList menuListItem" data-toggle="modal" data-target="#favoritesModal">
+            <span class="col-sm-1"><img src="image/star.png" /></span>
+            즐겨찾기
+          </a>
+          <!-- <a href="#" class="menuDefault menuListItem" data-toggle="modal" data-target="#myModal">
+            <span class="col-sm-1"></span>
+            주행 일정
+          </a> -->
+          <!-- <a href="#" class="menuDefault" data-toggle="modal" data-target="#myModal">
+            <span class="col-sm-1"></span>
+            최근 간 곳들 나올 부분
+          </a> -->
+      </div>
+    </div>
+
+    <div>
+      <div id="map">
+      </div>
+      <div id="backBtnWrapper">
+        <a href="#" id="goToAutocomplete"><img src="image/back.png" id="backBtn" /></a>
+      </div>
+      <div id="bottomBar">
+        <span style="font-size:30px;cursor:pointer;" onclick="openNav()" id="openNav"> <span class="glyphicon glyphicon-search"></span></span>
+      </div>
+      <div id="bottomDestContainer">
+        <div id="bottomDest">
+        </div>
+      </div>
+    </div>
+
+    <div id="rightBar" class="rightBar">
+      <div class="col-sm-12 placeDetail" id="">
+        <div class="col-sm-12 favCancel" id="">
+          <div class="col-sm-1 favoriteAdd" id="favoriteAddBtn">
+            <a href="#" id="OpenFavoriteAskModal" data-toggle="modal" data-target="#favoriteAskModal">&#9734;</a>
+          </div>
+          <div class="col-sm-5 favoriteAdd"> 즐겨찾기</div>
+          <div class="col-sm-6 cancelBtnWrapper">
+            <a href="#" id="closeRightSidebarBtn">
+              <img class="closeRightSidebar" src="image/cancel.png" />
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-12 placeIconWrapper"><img class="autocompletePlaceIcon" src="image/info.png" /></div>
+        <div class="col-sm-12" id="autocompletePlaceName"></div>
+        <div class="col-sm-12" id="autocompletePlaceCity"></div>
+        <div class="col-sm-12" id="autocompletePlaceDistance"></div>
+        <!-- <div class="col-sm-2"></div>
+        <div class="col-sm-8 center-block autocompletePlaceLine"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-12 autocompletePlacePhoneNumber" id="">
+          415-425-7623
+        </div> -->
+        <div class="col-sm-12 afterPhoneNumberLine"></div>
+        <!-- <div class="col-sm-4 reserveDepart"><button type="button" class="btn btn-default btn-block">예약</button></div> -->
+        <div class="col-sm-12 reserveDepart"><button type="button" id="departureBtn" class="btn btn-info btn-block">출발 </button></div>
+      </div>
+    </div>
+
+    <div id="gasStationInfoBar" class="gasStationInfoBar">
+      <div id="gasInfoPanel">
+      </div>
+    </div>
+
+    <!-- Favorite ask Modal -->
+    <div id="favoriteAskModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Favorites -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title">즐겨찾기 이름</h4>
+          </div>
+          <div class="modal-body">
+            <div class="col-sm-12"><input type="text" id="favoriteName" placeholder="home이나 work으로 등록하면 집이나 직장 위치로 설정됩니다." /></div>
+          </div>
+          <div class="modal-footer">
+            <div class="col-sm-6"><button type="button" class="btn btn-default btn-block" data-dismiss="modal">취소</button></div>
+            <div class="col-sm-6"><button type="button" class="btn btn-info btn-block" id="favoriteNameComplete" data-dismiss="modal">완료</button></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Close ask Modal -->
+    <div id="closeAskModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Favorites -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title">경로 안내를 종료할까요?</h4>
+          </div>
+          <div class="modal-body">
+            <div class="col-sm-12">예를 누르면 경로 안내를 종료합니다.</div>
+          </div>
+          <div class="modal-footer">
+            <div class="col-sm-6"><button type="button" class="btn btn-default btn-block" data-dismiss="modal">아니요</button></div>
+            <div class="col-sm-6"><button type="button" class="btn btn-info btn-block" id="navagationClose" data-dismiss="modal">예</button></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div id="favoritesModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Favorites -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">즐겨찾기</h4>
+          </div>
+          <div class="modal-body">
+            <div id="favoriteListContents"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default favoriteListCloseBtn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Setting Modal -->
+    <div id="settingModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">설정</h4>
+          </div>
+          <div class="modal-body option-modal-body">
+            <div class="modal-content-container">
+              <div class="col-sm-12 option-modal-contents">
+                <div class="col-sm-10">
+                  Waze 스타일 지도
+                </div>
+                <div class="col-sm-2">
+                  <input type="checkbox" id="isStyledMap" name="my-checkbox" checked>
+                </div>
+              </div>
+              <div class="col-sm-12 option-modal-contents">
+                <div class="col-sm-10">
+                  교통량 레이어 적용
+                </div>
+                <div class="col-sm-2">
+                  <input type="checkbox" id="isTrafficLayerOnOption" name="my-checkbox">
+                </div>
+              </div>
+              <div class="col-sm-12 option-modal-contents">
+                <div class="col-sm-10">
+                  고속도로 제외
+                </div>
+                <div class="col-sm-2">
+                  <input type="checkbox" id="avoidHighways" name="my-checkbox">
+                </div>
+              </div>
+              <div class="col-sm-12 option-modal-contents">
+                <div class="col-sm-10">
+                  톨게이트 제외
+                </div>
+                <div class="col-sm-2">
+                  <input type="checkbox" id="avoidTolls" name="my-checkbox">
+                </div>
+              </div>
+              <!-- <div class="col-sm-12 option-modal-contents form-group">
+                <div class="col-sm-6">
+                  음성 언어
+                </div>
+                <div class="col-sm-12">
+                  <select name="voice" id="voice" class="form-control"></select>
+                </div>
+              </div> -->
+              <!-- 길안내 자막 언어. 스피치 언어 설정, 배경맵 설정(hybrid/roadmap) -->
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default optionCloseBtn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Setting Modal -->
+    <div id="routeModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">전체 경로</h4>
+          </div>
+          <div class="modal-body option-modal-body">
+            <div class="modal-content-container" id="route-modal-content">
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default optionCloseBtn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Show Mic image -->
+    <div id="waitDialog" class="modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- GIF Image -->
+        <div class="modal-body">
+          <img src="image/voice-listen.gif" />
+        </div>
+        <button id="waitCloseBtn" type="button" class="btn btn-default" data-dismiss="modal"></button>
+      </div>
+    </div>
+
+    <!-- Show Loading image -->
+    <div id="loadingDialog" class="modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- GIF Image -->
+        <div class="modal-body">
+          <img src="image/loading.gif" />
+        </div>
+        <button id="loadingCloseBtn" type="button" class="btn btn-default" data-dismiss="modal"></button>
+      </div>
+    </div>
+
+    <!-- Navigation header -->
+    <div id="navigationBottomBar">
+      <div class="navigationBottomBarTitle">
+        <div class="col-sm-1">
+          <span style="font-size:30px;cursor:pointer;" onclick="openNav()" id="openNav"> <span class="glyphicon glyphicon-search"></span></span>
+        </div>
+        <div class="col-sm-1">
+
+        </div>
+        <div class="col-sm-0 downImage">
+          <!-- <img src="image/down.png" /> -->
+        </div>
+        <div class="col-sm-3" id="estimatedTime">
+          <!-- 소요시간 -->
+        </div>
+        <div class="col-sm-2 showTime">
+          <!-- 목적지 도착 시간 -->
+        </div>
+        <div class="col-sm-3" id="estimatedDistance">
+          <!-- 거리 -->
+        </div>
+        <div class="col-sm-2">
+
+        </div>
+      </div>
+      <div class="navigationBottomBarBody">
+        <div class="col-sm-6 destinationInfo">
+          <div id="destinationName">
+          </div>
+          <div id="destinationPanorama">
+          </div>
+        </div>
+        <div class="col-sm-6 navigationBottomBarBodyRight">
+          <div id="addWaypoints"><img src="image/add-waypoint.png" /> 경유지 추가
+          </div>
+          <div class="middleFunctions">
+            <div class="col-sm-4" id="openRouteModal">
+              <div id=""><img src="image/road.png" /></div>
+              <div>경로</div>
+            </div>
+            <div class="col-sm-4">
+              <a href="#" id="sendETA">
+                <div id=""><img src="image/send.png" /></div>
+                <div id="sendEta">ETA 전송</div>
+              </a>
+            </div>
+            <div class="col-sm-4" id="endButton">
+              <a href="#" data-toggle="modal" data-target="#closeAskModal">
+                <div id=""><img src="image/power-button.png" /></div>
+                <div id="closeNavigation">종료</div>
+              </a>
+            </div>
+          </div>
+          <div class="bottomBottons col-sm-12" id="">
+            <!-- <div class="col-sm-4"><button type="button" class="btn btn-default btn-block">예약</button></div> -->
+            <div class="col-sm-12"><button type="button" id="realDeparture" class="btn btn-info btn-block">출발</button></div>
+          </div>
+        </div>
+      </div>
+    </div>​
+  </div>
+  </div>
+</body>
+</html>
