@@ -1,0 +1,66 @@
+/* 지도 스타일 */
+html, body {
+  height: 672px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#map {
+  height: 100%;
+  width: 100%;
+}
+.container {
+  width: 100% !important;
+}
+/* 화면 스타일 */
+.panel-default > .panel-heading {
+    color: #FFF;
+     background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#466492, #152542); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#466492, #152542); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#466492, #152542); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#466492, #152542); /* Standard syntax */
+}
+.panel-default > .panel-heading.sub {
+    color: #FFF;
+     background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#6a8ec5, #2d4a80); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#6a8ec5, #2d4a80); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#6a8ec5, #2d4a80); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#6a8ec5, #2d4a80); /* Standard syntax */
+}
+
+/* 차트 스타일 */
+#dashboard {
+  z-index: 9997;
+
+}
+#bg_mask {
+  position: absolute;
+  top: 170;
+  right: 100;
+  z-index: 9998;
+  visibility: hidden;
+  background-color: #FFF;
+  opacity: 0.7;
+}
+
+#frontlayer {
+  visibility: hidden;
+  z-index: 9999;
+}
+
+/* 레전드 추가 */
+#legend {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  opacity: 0.7;
+  padding: 10px;
+  margin: 10px;
+}
+#legend h3 {
+  margin-top: 0;
+}
+#legend img {
+  vertical-align: middle;
+}

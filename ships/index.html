@@ -1,0 +1,68 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Maps Demo ver 1.0</title>
+  <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBsYVLaGllEz-XZYoF6xv_wqPsrG0k7oFs&libraries=places"></script>
+  <script src="https://www.google.com/jsapi"></script>
+  <script src="data/data.json" charset="utf-8"></script>
+  <script src="js/app.js" charset="utf-8"></script>
+  <script src="data/data_sph.json" charset="utf-8"></script>
+  <script src="js/app_sph.js" charset="utf-8"></script>
+  <script src="js/markerclusterer.js" charset="utf-8"></script>
+  <script src="js/charts.js" charset="utf-8"></script>
+</head>
+<body>
+  <div class="panel panel-default">
+	    <div class="panel-heading" id="ctlHeader">
+	    	CJ 대한통운
+        <a id="initiate" class="btn btn-primary" href="#" role="button">
+          지도 초기화
+        </a>
+	    	<a id="showAllPaths" class="btn btn-default non-sph" href="#" role="button">
+          모든 경로 표시
+	    	</a>
+	    	<a id="clearAllPaths" class="btn btn-default non-sph" href="#" role="button">
+	    		모든 경로 감춤
+	    	</a>
+	    	<a id="" class="btn btn-default non-sph" href="#" role="button" onclick="chart.dashboardToggle()">
+	    		Dashboard
+	    	</a>
+	    	<a id="" class="btn btn-default non-sph" href="#" role="button" onclick="init.darkStyle()">
+	    		Dark Theme
+	    	</a>
+        <a id="" class="btn btn-default non-sph" href="#" role="button" onclick="init.enableMarkerCluster();">
+          클러스터
+        </a>
+        <a id="sph" class="btn btn-success" href="#" role="button" onclick="sph.initWithMarkerCluster();">
+          SPH
+        </a>
+        <div id="bg_mask">
+          <div id="frontlayer">
+            <div id="result"></div>
+          </div>
+        </div>
+	    </div>
+
+	    <div class="panel-body">
+    		<div class="panel panel-default col-md-12">
+    		    <div class="panel-heading sub">
+    		    	선박 현황
+    		    </div>
+    		    <div class="panel-body" style="height: 100%;">
+              <div id="map-container" class="container">
+            		<div id="map"></div>
+            		<div id="legend"><h3>Legends</h3></div>
+            	</div>
+    		    </div>
+    		</div>
+	    </div>
+
+	</div>
+</body>
+</html>
