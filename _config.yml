@@ -2,19 +2,20 @@
 title: A blog about Chiho
 description: A blog about Chiho
 # baseurl: "/particle" # the subpath of your site, e.g. /blog
-url: "http://www.sphinfo.com/"
+url: "http://www.travelflan.com/"
 
 # User settings
 username: Chiho Yoon
-user_description: Not only specialised in GIS, but also a web and Andorid delvoper. Eager to learn new concepts and a great team player. Currently working at a Google Premium Partner company
-user_title: Web Developer, GIS Specialist
+user_description: Junior Frontend Engineer, specialised in VueJS and ECMAScript 2015. Former GIS engineer. Eager to learn new concepts and a great team player. Currently working at a Hong Kong based AI startup.
+user_title: Frontend Engineer, Web Developer, GIS Specialist
 email: chiho1jjan@naver.com
-twitter_username: lorem_ipsum
-github_username:  chonim
-gplus_username:  lorem_ipsum
+github_username: chonim
 
 # Google-analytics
 google-analytics:
   id: "UA-96178108-1"
 
 exclude: ['package.json', 'src' , 'node_modules']
+
+# jekyll s
+# browser-sync start --proxy "localhost:4000" --files "_site/**/*"
