@@ -1,6 +1,6 @@
 # Chonim's Portfolio with Particle Jekyll Theme
 
-##URL
+## URL
 
 Please visit my [portfolio page](http://chonim.github.io/)
 
